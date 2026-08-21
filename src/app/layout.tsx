@@ -30,7 +30,10 @@ const syne = Syne({
 export const metadata: Metadata = {
   title: "ThetaSofts — We Build Websites, Apps & Online Stores That Grow Your Business",
   description: "ThetaSofts is a full-service digital agency. We build beautiful websites, mobile apps, and online stores for businesses of all sizes. Get found on Google, sell more, and grow faster — without the tech headache.",
-  keywords: "website design, mobile app development, online store, SEO, digital agency, web development, e-commerce",
+  keywords: "software development, software agency, custom software development, web development, website development, web application development, mobile app development, iOS app development, Android app development, desktop app development, Windows app development, macOS app development, Linux app development, cross-platform app development, custom applications, business software, SaaS development, software maintenance, software management, software solutions, digital solutions, UI UX design, full stack development, e-commerce development",
+  verification: {
+    google: "KMrbK_PGnXRbjMg6r6ZJYJ_z3mbDiVtffzUHC0ERqG4",
+  },
   openGraph: {
     title: "ThetaSofts — Your Business, Online & Growing",
     description: "We build websites, apps, and online stores that get results. No tech jargon. Just real growth for your business.",
