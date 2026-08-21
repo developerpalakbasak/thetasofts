@@ -237,10 +237,16 @@ const Footer: React.FC = () => {
           <p>
             © {new Date().getFullYear()} ThetaSofts. All rights reserved.
           </p>
-          <div className="flex gap-8">
+          {/* <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
             <Link href="/security" className="hover:text-foreground transition-colors">Security Disclosure</Link>
+          </div> */}
+          <div>
+            <p>Meet Founder&apos;s</p>
+            <Link className='text-xs text-secondary underline' href="https://developerpalakbasak.vercel.app/" target="_blank" rel="noopener noreferrer">Palak Basak</Link>
+            <span> | </span>
+            <Link className='text-xs text-secondary underline' href="https://fahmidurshanto.vercel.app/" target="_blank" rel="noopener noreferrer">Fahmidur Rahaman</Link>
           </div>
         </div>
       </div>

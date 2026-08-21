@@ -141,7 +141,7 @@ const Results: React.FC = () => {
                                 {study.title}
                             </h4>
                             <p className="text-base md:text-lg font-medium text-black dark:text-gray-200 mb-4 font-space-grotesk italic">
-                                "{study.outcome}"
+                                &quot;{study.outcome}&quot;
                             </p>
                             <p className="text-black dark:text-gray-400 font-space-grotesk mb-8 flex-1 leading-relaxed">
                                 {study.description}

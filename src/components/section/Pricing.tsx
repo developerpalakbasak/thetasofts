@@ -5,7 +5,7 @@ import Link from 'next/link';
 const PLANS = [
     {
         name: "Starter",
-        price: "799",
+        price: "499",
         maintenanceFee: "49",
         pages: "Up to 3 Pages",
         description: "Perfect if you're just getting started and need a professional online presence that gets you noticed.",
@@ -21,7 +21,7 @@ const PLANS = [
     },
     {
         name: "Growth",
-        price: "2,499",
+        price: "1,499",
         maintenanceFee: "149",
         pages: "Up to 8 Pages",
         description: "Best for growing businesses that want to attract more customers, sell online, and run smoother operations.",
@@ -65,7 +65,7 @@ const Pricing: React.FC = () => {
                     <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">Simple, Honest Pricing</h2>
                     <h3 className="text-2xl md:text-3xl font-medium font-syne mb-6">
                         You Know Exactly <br />
-                        <span className="text-secondary">What You're Getting</span>
+                        <span className="text-secondary">What You&apos;re Getting</span>
                     </h3>
                     <p className="text-black dark:text-gray-400 max-w-2xl mx-auto text-lg font-space-grotesk">
                         No hidden fees. No confusing packages. Just clear, fair pricing that grows with your business.
@@ -151,7 +151,7 @@ const Pricing: React.FC = () => {
                     <div className="flex-1 text-center md:text-left relative z-10">
                         <h4 className="text-lg md:text-xl font-syne font-bold text-foreground mb-2">Our Development Promise</h4>
                         <p className="text-black dark:text-gray-400 font-space-grotesk text-sm max-w-md mx-auto md:mx-0">
-                            We want you to be 100% satisfied. That's why every project comes with standard guarantees to give you peace of mind.
+                            We want you to be 100% satisfied. That&apos;s why every project comes with standard guarantees to give you peace of mind.
                         </p>
                     </div>
                     

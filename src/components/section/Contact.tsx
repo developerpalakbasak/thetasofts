@@ -6,21 +6,21 @@ const CONTACT_INFO = [
     label: "Drop Us an Email",
     value: "contact.thetasofts@gmail.com",
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
     )
   },
   {
     label: "We Reply Within",
     value: "24 Hours, Guaranteed",
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
     )
   },
   {
     label: "We're Available",
     value: "7 Days a Week",
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
     )
   }
 ];
@@ -43,7 +43,7 @@ const ContactFormInner = () => {
     };
 
     window.addEventListener('selectPlan', handleSelectPlan as EventListener);
-    
+
     return () => {
       window.removeEventListener('selectPlan', handleSelectPlan as EventListener);
     };
@@ -86,7 +86,7 @@ const ContactFormInner = () => {
         message: ""
       });
       setSelectedPlan("");
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => {
         setStatus("idle");
@@ -141,7 +141,7 @@ const ContactFormInner = () => {
           </div>
           <div className="space-y-2">
             <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">Interested Plan</label>
-            <select 
+            <select
               value={selectedPlan}
               onChange={(e) => setSelectedPlan(e.target.value)}
               className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all appearance-none cursor-pointer"
@@ -156,7 +156,7 @@ const ContactFormInner = () => {
 
         <div className="space-y-2">
           <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">Project Type</label>
-          <select 
+          <select
             name="projectType"
             value={formData.projectType}
             onChange={handleChange}
@@ -191,7 +191,7 @@ const ContactFormInner = () => {
 
         {status === "success" && (
           <div className="p-4 bg-secondary/10 border border-secondary/50 rounded-xl text-secondary text-sm">
-            Message sent successfully! We'll be in touch shortly.
+            Message sent successfully! We&apos;ll be in touch shortly.
           </div>
         )}
 
@@ -228,13 +228,13 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Left Side: Info */}
           <div className="flex flex-col justify-center">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">Let's Connect</h2>
+            <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">Let&apos;s Connect</h2>
             <h3 className="text-2xl md:text-3xl font-medium font-syne mb-8 leading-tight">
-              We're Here to Help <br />
+              We&apos;re Here to Help <br />
               <span className="text-secondary">Your Vision Grow</span>
             </h3>
             <p className="text-black dark:text-gray-400 text-lg font-space-grotesk mb-12 max-w-lg leading-relaxed">
-              Have a question or a project in mind? We'd love to hear from you. Send us a message and let's start a conversation about how we can support your journey.
+              Have a question or a project in mind? We&apos;d love to hear from you. Send us a message and let&apos;s start a conversation about how we can support your journey.
             </p>
 
             <div className="space-y-8">
