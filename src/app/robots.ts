@@ -1,15 +1,15 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thetasofts.com";
+
   return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/login"],
-      },
-    ],
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/api/", "/login"],
+    },
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
