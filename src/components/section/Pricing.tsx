@@ -76,7 +76,7 @@ const Pricing: React.FC = () => {
                     {PLANS.map((plan, index) => (
                         <div 
                             key={index}
-                            className={`relative flex flex-col p-10 rounded-3xl border transition-all duration-500 hover:-translate-y-2 ${
+                            className={`relative flex flex-col p-10 rounded-3xl border transition-all duration-500 ${
                                 plan.recommended 
                                 ? "bg-foreground/10 border-secondary/50 shadow-[0_0_40px_rgba(156,254,202,0.1)] z-20" 
                                 : "bg-foreground/5 border-foreground/10 hover:border-foreground/20 z-10"
@@ -136,8 +136,8 @@ const Pricing: React.FC = () => {
                                 }}
                                 className={`block text-center w-full py-4 rounded-xl font-bold transition-all duration-300 ${
                                 plan.recommended 
-                                ? "rounded-xl px-6 py-3 font-semibold text-white transition bg-btn shadow-[0_0_2px_#9cfeca] hover:shadow-[0_0_6px_#9cfeca] hover:brightness-110" 
-                                : "bg-foreground/10 text-foreground hover:bg-foreground/20 border border-foreground/10"
+                                ? "rounded-xl px-6 py-3 font-semibold text-white bg-btn shadow-[0_0_2px_#9cfeca] hover:shadow-[0_0_6px_#9cfeca] hover:brightness-110 transition-transform duration-300 hover:-translate-y-1" 
+                                : "bg-foreground/10 text-foreground hover:bg-foreground/20 border border-foreground/10 transition-transform duration-300 hover:-translate-y-1"
                             }`}>
                                 {plan.buttonText}
                             </Link>
