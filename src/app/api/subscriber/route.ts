@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const connection = await dbConnect('/subscriber');
+    const connection = await dbConnect();
     const Subscriber = getSubscriberModel(connection);
 
     // Check if subscriber already exists

@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const connection = await dbConnect('/contact');
+    const connection = await dbConnect();
     const Contact = getContactModel(connection);
 
     const newContact = await Contact.create({
