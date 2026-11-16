@@ -215,7 +215,7 @@ const Footer: React.FC = () => {
                 disabled={loading}
                 required
                 placeholder="architect@company.com"
-                className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-xs text-foreground placeholder:text-black dark:placeholder:text-gray-600 focus:outline-none focus:border-secondary transition-all disabled:opacity-50"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-xs text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary transition-all disabled:opacity-50"
               />
               <Magnetic>
                 <button type="submit" disabled={loading} className="w-full btn-primary text-xs py-3 font-bold rounded-xl text-center shadow-none hover:shadow-[0_0_10px_#9cfeca] transition-all disabled:opacity-50 disabled:cursor-not-allowed">

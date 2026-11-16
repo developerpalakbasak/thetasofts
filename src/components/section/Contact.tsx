@@ -110,7 +110,7 @@ const ContactFormInner = () => {
               onChange={handleChange}
               required
               placeholder="John Doe"
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-black dark:placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
             />
           </div>
           <div className="space-y-2">
@@ -122,7 +122,7 @@ const ContactFormInner = () => {
               onChange={handleChange}
               required
               placeholder="john@example.com"
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-black dark:placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
             />
           </div>
         </div>
@@ -136,7 +136,7 @@ const ContactFormInner = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="+1 (555) 000-0000"
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-black dark:placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
             />
           </div>
           <div className="space-y-2">
@@ -179,7 +179,7 @@ const ContactFormInner = () => {
             onChange={handleChange}
             required
             placeholder="Tell us about your goals and technical requirements..."
-            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-black dark:placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all resize-y min-h-[120px] max-h-[400px] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-foreground/5 [&::-webkit-scrollbar-thumb]:bg-secondary/30 hover:[&::-webkit-scrollbar-thumb]:bg-secondary/50 [&::-webkit-scrollbar-thumb]:rounded-full"
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all resize-y min-h-[120px] max-h-[400px] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-foreground/5 [&::-webkit-scrollbar-thumb]:bg-secondary/30 hover:[&::-webkit-scrollbar-thumb]:bg-secondary/50 [&::-webkit-scrollbar-thumb]:rounded-full"
           ></textarea>
         </div>
 
