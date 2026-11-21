@@ -68,7 +68,7 @@ const SERVICES = [
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="pt-12 sm:pt-16 relative overflow-hidden bg-background">
+    <section id="services" className="pt-12 sm:pt-16 pb-16 sm:pb-24 relative overflow-hidden bg-background">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
 

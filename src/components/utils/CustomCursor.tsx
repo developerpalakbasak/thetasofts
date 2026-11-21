@@ -3,11 +3,16 @@
 import { useEffect, useState } from 'react';
 import styles from './CustomCursor.module.css';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 const CustomCursor = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [hasHover, setHasHover] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  
+  const { resolvedTheme } = useTheme();
+  const isDark = mounted ? resolvedTheme === 'dark' : true;
   
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -17,7 +22,7 @@ const CustomCursor = () => {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Check if the device has hover capability (desktop/mouse vs touch device)
+    setMounted(true);
     const mediaQuery = window.matchMedia('(hover: hover)');
     setHasHover(mediaQuery.matches);
 
@@ -52,7 +57,7 @@ const CustomCursor = () => {
           window.getComputedStyle(target).cursor === 'pointer';
           
         setIsHovered(isInteractive);
-      } catch (err) {
+      } catch {
         setIsHovered(false);
       }
     };
@@ -86,8 +91,15 @@ const CustomCursor = () => {
         animate={{
           scale: isHovered ? 2.2 : 1,
           opacity: isVisible ? 1 : 0,
-          backgroundColor: isHovered ? 'rgba(156, 254, 202, 0.15)' : 'rgba(156, 254, 202, 0.03)',
-          borderColor: isHovered ? 'rgba(156, 254, 202, 0.8)' : 'rgba(156, 254, 202, 0.4)',
+          backgroundColor: isDark
+            ? (isHovered ? 'rgba(156, 254, 202, 0.15)' : 'rgba(156, 254, 202, 0.03)')
+            : (isHovered ? 'rgba(5, 150, 105, 0.15)' : 'rgba(5, 150, 105, 0.04)'),
+          borderColor: isDark
+            ? (isHovered ? 'rgba(156, 254, 202, 0.85)' : 'rgba(156, 254, 202, 0.4)')
+            : (isHovered ? 'rgba(5, 150, 105, 0.85)' : 'rgba(5, 150, 105, 0.45)'),
+          boxShadow: isDark
+            ? (isHovered ? '0 0 16px rgba(156, 254, 202, 0.25)' : '0 0 10px rgba(156, 254, 202, 0.1)')
+            : (isHovered ? '0 0 14px rgba(5, 150, 105, 0.3)' : '0 0 8px rgba(5, 150, 105, 0.15)'),
           borderWidth: isHovered ? '2px' : '1px'
         }}
         transition={{
@@ -104,7 +116,12 @@ const CustomCursor = () => {
         animate={{
           scale: isHovered ? 1.5 : 1,
           opacity: isVisible ? 1 : 0,
-          backgroundColor: isHovered ? '#fff' : '#9cfeca'
+          backgroundColor: isDark
+            ? (isHovered ? '#ffffff' : '#9cfeca')
+            : (isHovered ? '#0f172a' : '#059669'),
+          boxShadow: isDark
+            ? (isHovered ? '0 0 10px #ffffff' : '0 0 8px #9cfeca')
+            : (isHovered ? '0 0 8px rgba(15, 23, 42, 0.5)' : '0 0 8px rgba(5, 150, 105, 0.6)')
         }}
         transition={{
           opacity: { duration: 0.15 },

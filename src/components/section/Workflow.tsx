@@ -479,7 +479,7 @@ const Visual4 = ({ isDark }: { isDark: boolean }) => {
 };
 
 /* ── Main Component ────────────────────────────────────────────── */
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 
 const WorkFlows: React.FC = () => {
   const { resolvedTheme } = useTheme();
@@ -487,11 +487,11 @@ const WorkFlows: React.FC = () => {
   // Fixed TypeScript ref type for Framer Motion useScroll
   const timelineRef = useRef<HTMLDivElement | null>(null);
 
-   const mounted = useSyncExternalStore(
-        emptySubscribe,
-        () => true,
-        () => false
-    );
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   const isDark = mounted ? resolvedTheme === "dark" : true;
 
@@ -582,7 +582,7 @@ const WorkFlows: React.FC = () => {
                 }
               >
                 {/* Timeline Node */}
-                <div className="absolute top-1/2 left-[20px] md:left-1/2 w-12 h-12 rounded-full -translate-x-1/2 -translate-y-1/2 z-[2] flex items-center justify-center text-sm font-bold text-black font-syne transform-gpu bg-secondary shadow-[0_0_20px_rgba(156,254,202,0.6)]">
+                <div className="absolute top-1/2 left-[20px] md:left-1/2 w-12 h-12 rounded-full -translate-x-1/2 -translate-y-1/2 z-[2] flex items-center justify-center text-sm font-bold text-white dark:text-black font-syne transform-gpu bg-secondary shadow-[0_0_20px_rgba(156,254,202,0.6)]">
                   {String(index + 1).padStart(2, "0")}
                 </div>
 
@@ -599,22 +599,24 @@ const WorkFlows: React.FC = () => {
                           ease: [0.16, 1, 0.3, 1],
                         }}
                         viewport={{ once: true, margin: "-80px" }}
-                        className="will-change-transform group relative p-8 md:p-10 rounded-[24px] border border-foreground/10 bg-foreground/5 overflow-hidden transition-[transform,box-shadow] duration-500 cursor-default md:-rotate-1 hover:!-translate-y-[8px] hover:!rotate-0 hover:!scale-[1.02] hover:shadow-[0_0_40px_var(--accent-18)]"
+                        className="group w-full"
                       >
-                        <div className="w-[58px] h-[58px] rounded-2xl flex items-center justify-center mb-7 border transition-colors duration-300 bg-[var(--accent-12)] border-[var(--accent-30)] text-[var(--accent)] shadow-[0_0_10px_var(--accent-18)]">
-                          {service.icon}
+                        <div className="relative p-8 md:p-10 rounded-[24px] border border-foreground/10 bg-foreground/5 overflow-hidden transition-all duration-300 cursor-default md:-rotate-1 group-hover:-translate-y-2 group-hover:rotate-0 group-hover:scale-[1.01] group-hover:shadow-[0_0_40px_var(--accent-18)]">
+                          <div className="w-[58px] h-[58px] rounded-2xl flex items-center justify-center mb-7 border transition-colors duration-300 bg-[var(--accent-12)] border-[var(--accent-30)] text-[var(--accent)] shadow-[0_0_10px_var(--accent-18)]">
+                            {service.icon}
+                          </div>
+
+                          <h3 className="text-xl font-semibold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
+                            {service.title}
+                          </h3>
+
+                          <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm">
+                            {service.description}
+                          </p>
+
+                          {/* Bottom accent line */}
+                          <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 rounded-b-[24px] bg-[linear-gradient(90deg,var(--accent),transparent)]" />
                         </div>
-
-                        <h3 className="text-xl font-semibold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
-                          {service.title}
-                        </h3>
-
-                        <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm">
-                          {service.description}
-                        </p>
-
-                        {/* Bottom accent line */}
-                        <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 rounded-b-[24px] bg-[linear-gradient(90deg,var(--accent),transparent)]" />
                       </motion.div>
                     </div>
 
@@ -661,21 +663,23 @@ const WorkFlows: React.FC = () => {
                           ease: [0.16, 1, 0.3, 1],
                         }}
                         viewport={{ once: true, margin: "-80px" }}
-                        className="will-change-transform group relative p-8 md:p-10 rounded-[24px] border border-foreground/10 bg-foreground/5 overflow-hidden transition-[transform,box-shadow] duration-500 cursor-default md:rotate-1 hover:!-translate-y-[8px] hover:!rotate-0 hover:!scale-[1.02] hover:shadow-[0_0_40px_var(--accent-18)]"
+                        className="group w-full"
                       >
-                        <div className="w-[58px] h-[58px] rounded-2xl flex items-center justify-center mb-7 border transition-colors duration-300 bg-[var(--accent-12)] border-[var(--accent-30)] text-[var(--accent)] shadow-[0_0_10px_var(--accent-18)]">
-                          {service.icon}
+                        <div className="relative p-8 md:p-10 rounded-[24px] border border-foreground/10 bg-foreground/5 overflow-hidden transition-all duration-300 cursor-default md:rotate-1 group-hover:-translate-y-2 group-hover:rotate-0 group-hover:scale-[1.01] group-hover:shadow-[0_0_40px_var(--accent-18)]">
+                          <div className="w-[58px] h-[58px] rounded-2xl flex items-center justify-center mb-7 border transition-colors duration-300 bg-[var(--accent-12)] border-[var(--accent-30)] text-[var(--accent)] shadow-[0_0_10px_var(--accent-18)]">
+                            {service.icon}
+                          </div>
+
+                          <h3 className="text-xl font-semibold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
+                            {service.title}
+                          </h3>
+
+                          <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm">
+                            {service.description}
+                          </p>
+
+                          <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 rounded-b-[24px] bg-[linear-gradient(90deg,var(--accent),transparent)]" />
                         </div>
-
-                        <h3 className="text-xl font-semibold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
-                          {service.title}
-                        </h3>
-
-                        <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm">
-                          {service.description}
-                        </p>
-
-                        <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 rounded-b-[24px] bg-[linear-gradient(90deg,var(--accent),transparent)]" />
                       </motion.div>
                     </div>
                   </>

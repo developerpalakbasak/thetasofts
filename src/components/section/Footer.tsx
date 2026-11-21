@@ -219,7 +219,7 @@ const Footer: React.FC = () => {
               />
               <Magnetic>
                 <button type="submit" disabled={loading} className="w-full btn-primary text-xs py-3 font-bold rounded-xl text-center shadow-none hover:shadow-[0_0_10px_#9cfeca] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
-                  {loading ? 'Subscribing...' : 'Subscribe'}
+                  {loading ? 'Submitting...' : 'Submit'}
                 </button>
               </Magnetic>
               {status.message && (
