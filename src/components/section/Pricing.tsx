@@ -11,137 +11,18 @@ import {
   Clock, 
   ChevronDown
 } from "lucide-react";
-
-type PricingMode = "fixed" | "subscription";
-type ServiceCategory = "web" | "mobile";
-
-interface ScopeOption {
-  id: string;
-  label: string;
-  subtitle: string;
-}
-
-interface TierPackage {
-  name: string;
-  badge?: string;
-  isPopular?: boolean;
-  type: string;
-  price: number | string;
-  tagline: string;
-  features: string[];
-  ctaText: string;
-}
-
-// Web Scopes & Prices (Derived & benchmarked against Design Monks)
-const WEB_SCOPES: ScopeOption[] = [
-  { id: "1-4", label: "1–4 Pages", subtitle: "Landing page & microsites" },
-  { id: "5-9", label: "5–9 Pages", subtitle: "Standard business / SaaS sites" },
-  { id: "10-15", label: "10–15 Pages", subtitle: "High-growth product platforms" },
-  { id: "16-25", label: "16–25 Pages", subtitle: "Complex multi-page portals" },
-  { id: "enterprise", label: "Enterprise", subtitle: "Custom scalable architecture" }
-];
-
-const WEB_PRICING_TABLE: Record<string, { launch: number | string; growth: number | string; signature: number | string }> = {
-  "1-4": { launch: 299, growth: 599, signature: 899 },
-  "5-9": { launch: 499, growth: 999, signature: 1499 },
-  "10-15": { launch: 799, growth: 1499, signature: 2199 },
-  "16-25": { launch: 1199, growth: 2199, signature: 2999 },
-  "enterprise": { launch: "Custom", growth: "Custom", signature: "Custom" }
-};
-
-// Mobile Scopes & Prices
-const MOBILE_SCOPES: ScopeOption[] = [
-  { id: "1-10", label: "1–10 Screens", subtitle: "MVP & core user journey" },
-  { id: "11-25", label: "11–25 Screens", subtitle: "Standard feature-rich app" },
-  { id: "26-40", label: "26–40 Screens", subtitle: "Multi-role / SaaS mobile app" },
-  { id: "41-60", label: "41–60 Screens", subtitle: "Full-scale enterprise app" },
-  { id: "enterprise", label: "Enterprise", subtitle: "Multi-platform ecosystem" }
-];
-
-const MOBILE_PRICING_TABLE: Record<string, { launch: number | string; growth: number | string; signature: number | string }> = {
-  "1-10": { launch: 349, growth: 699, signature: 1099 },
-  "11-25": { launch: 649, growth: 1199, signature: 1799 },
-  "26-40": { launch: 999, growth: 1799, signature: 2599 },
-  "41-60": { launch: 1499, growth: 2599, signature: 3699 },
-  "enterprise": { launch: "Custom", growth: "Custom", signature: "Custom" }
-};
-
-// Monthly Subscriptions
-const WEB_SUBSCRIPTIONS = [
-  {
-    name: "Startup Sprint",
-    hours: "80 Hours / month",
-    rate: "699",
-    badge: "Part-Time Pod",
-    tagline: "Ideal for continuous website iterations, Framer/Webflow pages, and conversion experiments.",
-    features: [
-      "80 dedicated hours per month",
-      "Figma UI/UX & Webflow / Framer build",
-      "Unlimited requests in queue (1 active)",
-      "Dedicated Project Manager",
-      "48-hour average turnaround",
-      "Slack / Discord + async Loom walkthroughs",
-      "Unused hours rollover protection"
-    ],
-    ctaText: "Start Web Sprint"
-  },
-  {
-    name: "Growth Engine",
-    hours: "160 Hours / month",
-    rate: "1,299",
-    badge: "Most Popular · Full-Time",
-    isPopular: true,
-    tagline: "Full-time equivalent output for scaling brands requiring parallel design & development streams.",
-    features: [
-      "160 dedicated hours per month",
-      "Full design team: Senior UI/UX + Webflow Dev",
-      "Parallel task streams in active progress",
-      "Weekly live strategy & roadmap syncs",
-      "Design System governance & token sync",
-      "Priority 24-48 hour turnaround on core tasks",
-      "Quarterly technical SEO & CRO audits"
-    ],
-    ctaText: "Get Full-Time Team"
-  }
-];
-
-const MOBILE_SUBSCRIPTIONS = [
-  {
-    name: "App Sprint",
-    hours: "80 Hours / month",
-    rate: "799",
-    badge: "Part-Time Pod",
-    tagline: "Dedicated product designer for ongoing iOS/Android screen design, flows, and design systems.",
-    features: [
-      "80 dedicated hours of mobile product design",
-      "iOS Human Interface & Material 3 guidelines",
-      "Clickable interactive Figma prototypes",
-      "Design tokens & developer handoff specs",
-      "App Store & Google Play screenshots",
-      "Direct Slack channel with senior mobile lead",
-      "Unused hours rollover (30 days)"
-    ],
-    ctaText: "Start Mobile Sprint"
-  },
-  {
-    name: "Product Powerhouse",
-    hours: "160 Hours / month",
-    rate: "1,499",
-    badge: "Most Popular · Full Squad",
-    isPopular: true,
-    tagline: "Dedicated end-to-end mobile squad tackling UX research, UI design, animations, and frontend support.",
-    features: [
-      "160 dedicated hours of senior mobile output",
-      "UI/UX Lead + Mobile Animation / Lottie designer",
-      "Parallel flow iterations & micro-interactions",
-      "React Native / Flutter frontend handoff guidance",
-      "Weekly sprint planning & backlog reviews",
-      "Same-day Slack response & live video syncs",
-      "Quarterly UX usability benchmark reports"
-    ],
-    ctaText: "Hire Mobile Squad"
-  }
-];
+import {
+  PricingMode,
+  ServiceCategory,
+  TierPackage,
+  SelectedPlanPayload,
+  WEB_SCOPES,
+  WEB_PRICING_TABLE,
+  MOBILE_SCOPES,
+  MOBILE_PRICING_TABLE,
+  WEB_SUBSCRIPTIONS,
+  MOBILE_SUBSCRIPTIONS
+} from "@/data/pricingData";
 
 const Pricing: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<ServiceCategory>("web");
@@ -150,9 +31,9 @@ const Pricing: React.FC = () => {
   const [selectedMobileScope, setSelectedMobileScope] = useState<string>("11-25");
   const [showMatrix, setShowMatrix] = useState<boolean>(false);
 
-  const handleSelectPlan = (planName: string) => {
+  const handleSelectPlan = (planData: string | SelectedPlanPayload) => {
     if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("selectPlan", { detail: planName }));
+      window.dispatchEvent(new CustomEvent("selectPlan", { detail: planData }));
       const contactSection = document.getElementById("contact");
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: "smooth" });
@@ -448,11 +329,20 @@ const Pricing: React.FC = () => {
                 <div className="w-full [&>div]:w-full">
                   <Magnetic>
                     <button
-                      onClick={() => handleSelectPlan(`${activeCategory.toUpperCase()} - ${tier.name}`)}
+                      onClick={() =>
+                        handleSelectPlan({
+                          category: activeCategory,
+                          mode: "fixed",
+                          tierName: tier.name,
+                          scope: activeCategory === "web" ? selectedWebScope : selectedMobileScope,
+                          price: tier.price,
+                          summary: `${activeCategory === "web" ? "Web" : "Mobile App"} · ${tier.name} (${tier.price})`
+                        })
+                      }
                       className={
                         tier.isPopular
-                          ? "w-full btn-primary text-xs py-3.5 font-bold rounded-xl text-center uppercase tracking-wider shadow-none hover:shadow-[0_0_10px_#9cfeca] transition-all hover:brightness-110"
-                          : "block text-center w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-foreground/10 text-foreground hover:bg-foreground/20 border border-foreground/10 transition-transform duration-300 hover:-translate-y-1"
+                          ? "w-full btn-primary text-xs py-3.5 font-bold rounded-xl text-center uppercase tracking-wider shadow-none hover:shadow-[0_0_10px_#9cfeca] transition-all hover:brightness-110 cursor-pointer"
+                          : "block text-center w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-foreground/10 text-foreground hover:bg-foreground/20 border border-foreground/10 transition-transform duration-300 hover:-translate-y-1 cursor-pointer"
                       }
                     >
                       {tier.ctaText}
@@ -513,11 +403,20 @@ const Pricing: React.FC = () => {
                 <div className="w-full [&>div]:w-full">
                   <Magnetic>
                     <button
-                      onClick={() => handleSelectPlan(`${activeCategory.toUpperCase()} Subscription - ${sub.name}`)}
+                      onClick={() =>
+                        handleSelectPlan({
+                          category: activeCategory,
+                          mode: "subscription",
+                          tierName: sub.name,
+                          scope: sub.hours,
+                          price: `$${sub.rate}/mo`,
+                          summary: `${activeCategory === "web" ? "Web" : "Mobile App"} Subscription · ${sub.name} ($${sub.rate}/mo)`
+                        })
+                      }
                       className={
                         sub.isPopular
-                          ? "w-full btn-primary text-xs py-3.5 font-bold rounded-xl text-center uppercase tracking-wider shadow-none hover:shadow-[0_0_10px_#9cfeca] transition-all hover:brightness-110"
-                          : "block text-center w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-foreground/10 text-foreground hover:bg-foreground/20 border border-foreground/10 transition-transform duration-300 hover:-translate-y-1"
+                          ? "w-full btn-primary text-xs py-3.5 font-bold rounded-xl text-center uppercase tracking-wider shadow-none hover:shadow-[0_0_10px_#9cfeca] transition-all hover:brightness-110 cursor-pointer"
+                          : "block text-center w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-foreground/10 text-foreground hover:bg-foreground/20 border border-foreground/10 transition-transform duration-300 hover:-translate-y-1 cursor-pointer"
                       }
                     >
                       {sub.ctaText}
@@ -533,7 +432,7 @@ const Pricing: React.FC = () => {
         <div className="text-center mb-16">
           <button
             onClick={() => setShowMatrix(!showMatrix)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-foreground/5 hover:bg-foreground/10 border border-foreground/10 text-xs font-semibold text-secondary transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-foreground/5 hover:bg-foreground/10 border border-foreground/10 text-xs font-semibold text-secondary transition-all cursor-pointer"
           >
             <span>{showMatrix ? "Hide Detailed Comparison Table" : "Compare Launch vs Growth vs Signature Table"}</span>
             <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showMatrix ? "rotate-180" : ""}`} />

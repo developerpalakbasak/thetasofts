@@ -1,5 +1,8 @@
 "use client";
+
 import React, { useState, useEffect } from 'react';
+import { Sparkles, CheckCircle2 } from 'lucide-react';
+import { SelectedPlanPayload } from '@/data/pricingData';
 
 const CONTACT_INFO = [
   {
@@ -25,27 +28,92 @@ const CONTACT_INFO = [
   }
 ];
 
+const PLAN_OPTIONS = [
+  {
+    group: "Web & Platforms (Fixed Project)",
+    options: [
+      { label: "Web · Launch Package (Design Only)", value: "Web · Launch Package" },
+      { label: "Web · Growth Package (Design + Dev)", value: "Web · Growth Package" },
+      { label: "Web · Signature Package (Design + Dev + Brand)", value: "Web · Signature Package" },
+    ]
+  },
+  {
+    group: "Mobile App (Fixed Project)",
+    options: [
+      { label: "Mobile · Launch Package (App Design Only)", value: "Mobile · Launch Package" },
+      { label: "Mobile · Growth Package (Design + Branding)", value: "Mobile · Growth Package" },
+      { label: "Mobile · Signature Package (Full Launch + Support)", value: "Mobile · Signature Package" },
+    ]
+  },
+  {
+    group: "Monthly Retainer Subscriptions",
+    options: [
+      { label: "Web Subscription · Startup Sprint ($699/mo)", value: "Web Subscription · Startup Sprint" },
+      { label: "Web Subscription · Growth Engine ($1,299/mo)", value: "Web Subscription · Growth Engine" },
+      { label: "Mobile Subscription · App Sprint ($799/mo)", value: "Mobile Subscription · App Sprint" },
+      { label: "Mobile Subscription · Product Powerhouse ($1,499/mo)", value: "Mobile Subscription · Product Powerhouse" },
+    ]
+  },
+  {
+    group: "Custom / Consulting",
+    options: [
+      { label: "Enterprise / Custom Architecture", value: "Enterprise / Custom Architecture" },
+      { label: "Not Sure Yet / Free Consultation", value: "Not Sure Yet" },
+    ]
+  }
+];
+
 const ContactFormInner = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
-    projectType: "Custom Software Development",
     message: ""
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Sync with Pricing plan clicks
   useEffect(() => {
-    const handleSelectPlan = (e: CustomEvent) => {
-      setSelectedPlan(e.detail);
+    const handleSelectPlanEvent = (e: CustomEvent<string | SelectedPlanPayload>) => {
+      const detail = e.detail;
+      if (!detail) return;
+
+      if (typeof detail === "string") {
+        const lower = detail.toLowerCase();
+        if (lower.includes("mobile")) {
+          if (lower.includes("launch")) setSelectedPlan("Mobile · Launch Package");
+          else if (lower.includes("signature")) setSelectedPlan("Mobile · Signature Package");
+          else if (lower.includes("sprint")) setSelectedPlan("Mobile Subscription · App Sprint");
+          else if (lower.includes("powerhouse")) setSelectedPlan("Mobile Subscription · Product Powerhouse");
+          else setSelectedPlan("Mobile · Growth Package");
+        } else {
+          if (lower.includes("launch")) setSelectedPlan("Web · Launch Package");
+          else if (lower.includes("signature")) setSelectedPlan("Web · Signature Package");
+          else if (lower.includes("sprint")) setSelectedPlan("Web Subscription · Startup Sprint");
+          else if (lower.includes("engine")) setSelectedPlan("Web Subscription · Growth Engine");
+          else setSelectedPlan("Web · Growth Package");
+        }
+      } else {
+        const isMobile = detail.category === "mobile";
+        if (detail.mode === "subscription") {
+          if (detail.tierName.includes("Startup")) setSelectedPlan("Web Subscription · Startup Sprint");
+          else if (detail.tierName.includes("Growth Engine")) setSelectedPlan("Web Subscription · Growth Engine");
+          else if (detail.tierName.includes("App Sprint")) setSelectedPlan("Mobile Subscription · App Sprint");
+          else if (detail.tierName.includes("Product Powerhouse")) setSelectedPlan("Mobile Subscription · Product Powerhouse");
+          else setSelectedPlan(`${isMobile ? "Mobile" : "Web"} Subscription · ${detail.tierName}`);
+        } else {
+          if (detail.tierName.includes("Launch")) setSelectedPlan(`${isMobile ? "Mobile" : "Web"} · Launch Package`);
+          else if (detail.tierName.includes("Signature")) setSelectedPlan(`${isMobile ? "Mobile" : "Web"} · Signature Package`);
+          else setSelectedPlan(`${isMobile ? "Mobile" : "Web"} · Growth Package`);
+        }
+      }
     };
 
-    window.addEventListener('selectPlan', handleSelectPlan as EventListener);
-
+    window.addEventListener('selectPlan', handleSelectPlanEvent as EventListener);
     return () => {
-      window.removeEventListener('selectPlan', handleSelectPlan as EventListener);
+      window.removeEventListener('selectPlan', handleSelectPlanEvent as EventListener);
     };
   }, []);
 
@@ -66,8 +134,14 @@ const ContactFormInner = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
-          plan: selectedPlan
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          plan: selectedPlan || "Not Sure Yet",
+          projectType: selectedPlan.includes("Mobile") 
+            ? "Mobile App" 
+            : (selectedPlan.includes("Web") ? "Web & Platforms" : "Custom Project"),
+          message: formData.message,
         }),
       });
 
@@ -82,27 +156,49 @@ const ContactFormInner = () => {
         fullName: "",
         email: "",
         phone: "",
-        projectType: "Custom Software Development",
         message: ""
       });
       setSelectedPlan("");
 
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setStatus("idle");
       }, 5000);
-    } catch (error: any) {
+    } catch (error: unknown) {
       setStatus("error");
-      setErrorMessage(error.message || 'Something went wrong');
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Something went wrong. Please try again.');
+      }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative bg-foreground/5 border border-secondary/10 p-6 md:p-10 rounded-2xl md:rounded-[32px] backdrop-blur-xl shadow-2xl">
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
+    <form onSubmit={handleSubmit} className="relative bg-foreground/5 border border-secondary/10 p-6 md:p-8 rounded-2xl md:rounded-[32px] backdrop-blur-xl shadow-2xl">
+      <div className="space-y-5">
+        
+        {/* Subtle Selected Plan Indicator */}
+        {selectedPlan && (
+          <div className="flex items-center justify-between px-4 py-2.5 rounded-xl bg-secondary/10 border border-secondary/20 text-xs">
+            <span className="text-foreground">
+              Selected Package: <strong className="text-secondary">{selectedPlan}</strong>
+            </span>
+            <button
+              type="button"
+              onClick={() => setSelectedPlan("")}
+              className="text-gray-400 hover:text-foreground text-[11px] underline cursor-pointer"
+            >
+              Clear
+            </button>
+          </div>
+        )}
+
+        {/* Full Name & Email */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">
+              Full Name *
+            </label>
             <input
               type="text"
               name="fullName"
@@ -110,11 +206,14 @@ const ContactFormInner = () => {
               onChange={handleChange}
               required
               placeholder="John Doe"
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">
+              Email Address *
+            </label>
             <input
               type="email"
               name="email"
@@ -122,83 +221,86 @@ const ContactFormInner = () => {
               onChange={handleChange}
               required
               placeholder="john@example.com"
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">Phone Number (Optional)</label>
+        {/* Phone & Interested Plan */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">
+              Phone Number (Optional)
+            </label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               placeholder="+1 (555) 000-0000"
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all"
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">Interested Plan</label>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">
+              Interested Plan / Service
+            </label>
             <select
               value={selectedPlan}
               onChange={(e) => setSelectedPlan(e.target.value)}
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all appearance-none cursor-pointer"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all appearance-none cursor-pointer"
             >
-              <option value="" className="bg-background text-foreground">Not Sure Yet</option>
-              <option value="Starter" className="bg-background text-foreground">Starter ($799)</option>
-              <option value="Growth" className="bg-background text-foreground">Growth ($2,499)</option>
-              <option value="Enterprise" className="bg-background text-foreground">Enterprise (Custom)</option>
+              <option value="" className="bg-background text-foreground">Select a plan or service...</option>
+              {PLAN_OPTIONS.map((group, idx) => (
+                <optgroup key={idx} label={group.group} className="bg-background text-foreground font-semibold">
+                  {group.options.map((opt) => (
+                    <option key={opt.value} value={opt.value} className="bg-background text-foreground font-normal">
+                      {opt.label}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
             </select>
           </div>
         </div>
 
-        <div className="space-y-2">
-          <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">Project Type</label>
-          <select
-            name="projectType"
-            value={formData.projectType}
-            onChange={handleChange}
-            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all appearance-none cursor-pointer"
-          >
-            <option value="Custom Software Development" className="bg-background text-foreground">Custom Software Development</option>
-            <option value="Mobile App Architecture" className="bg-background text-foreground">Mobile App Architecture</option>
-            <option value="SEO & Marketing Domination" className="bg-background text-foreground">SEO & Marketing Domination</option>
-            <option value="E-commerce Transformation" className="bg-background text-foreground">E-commerce Transformation</option>
-            <option value="Maintenance & Security" className="bg-background text-foreground">Maintenance & Security</option>
-          </select>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">How can we help?</label>
+        {/* Message */}
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-black dark:text-gray-400 uppercase tracking-widest ml-1">
+            How can we help? *
+          </label>
           <textarea
             rows={4}
             name="message"
             value={formData.message}
             onChange={handleChange}
             required
-            placeholder="Tell us about your goals and technical requirements..."
-            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 md:px-5 py-3 md:py-4 text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all resize-y min-h-[120px] max-h-[400px] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-foreground/5 [&::-webkit-scrollbar-thumb]:bg-secondary/30 hover:[&::-webkit-scrollbar-thumb]:bg-secondary/50 [&::-webkit-scrollbar-thumb]:rounded-full"
+            placeholder="Tell us about your project, goals, or timeline..."
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-gray-500 focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all resize-y min-h-[110px] max-h-[300px]"
           ></textarea>
         </div>
 
+        {/* Error Alert */}
         {status === "error" && (
-          <div className="p-4 bg-red-500/10 border border-red-500/50 rounded-xl text-red-400 text-sm">
+          <div className="p-3.5 bg-red-500/10 border border-red-500/40 rounded-xl text-red-400 text-sm">
             {errorMessage}
           </div>
         )}
 
+        {/* Success Alert */}
         {status === "success" && (
-          <div className="p-4 bg-secondary/10 border border-secondary/50 rounded-xl text-secondary text-sm">
-            Message sent successfully! We&apos;ll be in touch shortly.
+          <div className="p-3.5 bg-secondary/15 border border-secondary/50 rounded-xl text-secondary text-sm flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 shrink-0" />
+            <span>Message sent successfully! We&apos;ll be in touch within 24 hours.</span>
           </div>
         )}
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={status === "loading"}
-          className="btn-primary w-full py-5 rounded-2xl text-lg font-bold shadow-[0_0_30px_rgba(156,254,202,0.1)] hover:shadow-[0_0_40px_rgba(156,254,202,0.3)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="btn-primary w-full py-4 rounded-xl text-base font-bold shadow-[0_0_25px_rgba(156,254,202,0.15)] hover:shadow-[0_0_35px_rgba(156,254,202,0.3)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-[1.01]"
         >
           {status === "loading" ? (
             <>
@@ -206,14 +308,14 @@ const ContactFormInner = () => {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Sending...
+              <span>Sending...</span>
             </>
           ) : (
-            "Send My Message — It's Free"
+            <span>Send My Message — It&apos;s Free</span>
           )}
         </button>
 
-        <p className="text-center text-xs text-black dark:text-gray-500 font-space-grotesk mt-6">
+        <p className="text-center text-xs text-black dark:text-gray-500 font-space-grotesk">
           🔒 Your information is private and will never be shared.
         </p>
       </div>
@@ -223,29 +325,35 @@ const ContactFormInner = () => {
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="pb-6 sm:pb-24 pt-12 sm:pt-20 relative overflow-hidden">
+    <section id="contact" className="pb-12 sm:pb-24 pt-12 sm:pt-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-10 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          
           {/* Left Side: Info */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">Let&apos;s Connect</h2>
-            <h3 className="text-2xl md:text-3xl font-medium font-syne mb-8 leading-tight">
+          <div className="flex flex-col justify-center pt-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-xs font-semibold uppercase tracking-wider mb-4 w-fit">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Let&apos;s Connect</span>
+            </div>
+
+            <h3 className="text-2xl md:text-4xl font-bold font-syne mb-6 leading-tight">
               We&apos;re Here to Help <br />
               <span className="text-secondary">Your Vision Grow</span>
             </h3>
-            <p className="text-black dark:text-gray-400 text-lg font-space-grotesk mb-12 max-w-lg leading-relaxed">
+
+            <p className="text-black dark:text-gray-400 text-base md:text-lg font-space-grotesk mb-10 max-w-lg leading-relaxed">
               Have a question or a project in mind? We&apos;d love to hear from you. Send us a message and let&apos;s start a conversation about how we can support your journey.
             </p>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               {CONTACT_INFO.map((info, index) => (
-                <div key={index} className="flex items-center gap-6 group">
+                <div key={index} className="flex items-center gap-5 group">
                   <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20 shadow-[0_0_10px_rgba(156,254,202,0.1)] group-hover:shadow-[0_0_20px_rgba(156,254,202,0.3)] transition-all duration-300 shrink-0">
                     {info.icon}
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-bold text-black dark:text-gray-500 uppercase tracking-widest mb-1">{info.label}</p>
-                    <p className="text-lg sm:text-xl font-medium text-foreground break-all sm:break-normal">{info.value}</p>
+                    <p className="text-xs font-bold text-black dark:text-gray-500 uppercase tracking-widest mb-0.5">{info.label}</p>
+                    <p className="text-base sm:text-lg font-medium text-foreground break-all sm:break-normal">{info.value}</p>
                   </div>
                 </div>
               ))}
@@ -255,10 +363,10 @@ const Contact: React.FC = () => {
           {/* Right Side: Form */}
           <div className="relative">
             {/* Decorative glow behind form */}
-            <div className="absolute -inset-4 bg-secondary/5 rounded-[40px] blur-3xl pointer-events-none" />
-
+            <div className="absolute -inset-4 bg-secondary/10 rounded-[40px] blur-3xl pointer-events-none -z-10" />
             <ContactFormInner />
           </div>
+
         </div>
       </div>
     </section>

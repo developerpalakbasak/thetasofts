@@ -1,10 +1,15 @@
-import mongoose, { Schema, Document, Connection } from 'mongoose';
+import { Schema, Document, Connection } from 'mongoose';
 
 export interface IContact extends Document {
   fullName: string;
   email: string;
   phone?: string;
+  category?: string;
+  pricingMode?: string;
+  scope?: string;
   plan?: string;
+  estimatedPrice?: string;
+  timeline?: string;
   projectType?: string;
   message: string;
   isRead: boolean;
@@ -26,7 +31,22 @@ export const ContactSchema: Schema = new Schema(
     phone: {
       type: String,
     },
+    category: {
+      type: String,
+    },
+    pricingMode: {
+      type: String,
+    },
+    scope: {
+      type: String,
+    },
     plan: {
+      type: String,
+    },
+    estimatedPrice: {
+      type: String,
+    },
+    timeline: {
       type: String,
     },
     projectType: {
@@ -53,4 +73,3 @@ export const ContactSchema: Schema = new Schema(
 export function getContactModel(connection: Connection) {
   return connection.models.Contact || connection.model<IContact>('Contact', ContactSchema);
 }
-

@@ -5,7 +5,19 @@ import { dbConnect } from '@/lib/mongoose';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { fullName, email, phone, plan, projectType, message } = body;
+    const {
+      fullName,
+      email,
+      phone,
+      category,
+      pricingMode,
+      scope,
+      plan,
+      estimatedPrice,
+      timeline,
+      projectType,
+      message,
+    } = body;
 
     // Basic validation
     if (!fullName || !email || !message) {
@@ -18,15 +30,19 @@ export async function POST(request: Request) {
     const connection = await dbConnect();
     const Contact = getContactModel(connection);
 
-    const newContact = await Contact.create({
+    await Contact.create({
       fullName,
       email,
       phone,
+      category,
+      pricingMode,
+      scope,
       plan,
-      projectType,
+      estimatedPrice,
+      timeline,
+      projectType: projectType || (category === 'mobile' ? 'Mobile App Architecture' : 'Web & Platforms'),
       message,
     });
-
 
     return NextResponse.json(
       { success: true, message: 'Message sent successfully!' },
