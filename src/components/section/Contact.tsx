@@ -30,16 +30,28 @@ const CONTACT_INFO = [
 
 const PLAN_OPTIONS = [
   {
-    group: "Web & Platforms (Fixed Project)",
+    group: "Specialized Services (Web & Mobile)",
+    options: [
+      { label: "E-Commerce & Mobile Shopping Apps", value: "E-Commerce & Mobile Shopping Apps" },
+      { label: "Custom CRM & Enterprise Portals", value: "Custom CRM & Enterprise Portals" },
+      { label: "Websites & SaaS Platforms", value: "Websites & SaaS Platforms" },
+      { label: "Mobile Apps (iOS & Android)", value: "Mobile Apps (iOS & Android)" },
+      { label: "UI/UX Design & Prototyping", value: "UI/UX Design & Prototyping" },
+      { label: "AI Solutions & Smart Automation", value: "AI Solutions & Smart Automation" },
+      { label: "Cloud Infrastructure & APIs", value: "Cloud Infrastructure & APIs" },
+      { label: "Online Payments & FinTech Setup", value: "Online Payments & FinTech Setup" },
+      { label: "Third-Party & System Integrations", value: "Third-Party & System Integrations" },
+      { label: "SEO & Search Visibility", value: "SEO & Search Visibility" },
+      { label: "Desktop Software Solutions", value: "Desktop Software Solutions" },
+      { label: "24/7 Security & Maintenance", value: "24/7 Security & Maintenance" },
+    ]
+  },
+  {
+    group: "Fixed-Scope Packages (Pricing Table)",
     options: [
       { label: "Web · Launch Package (Design Only)", value: "Web · Launch Package" },
       { label: "Web · Growth Package (Design + Dev)", value: "Web · Growth Package" },
       { label: "Web · Signature Package (Design + Dev + Brand)", value: "Web · Signature Package" },
-    ]
-  },
-  {
-    group: "Mobile App (Fixed Project)",
-    options: [
       { label: "Mobile · Launch Package (App Design Only)", value: "Mobile · Launch Package" },
       { label: "Mobile · Growth Package (Design + Branding)", value: "Mobile · Growth Package" },
       { label: "Mobile · Signature Package (Full Launch + Support)", value: "Mobile · Signature Package" },
@@ -63,6 +75,8 @@ const PLAN_OPTIONS = [
   }
 ];
 
+const ALL_PLAN_VALUES = PLAN_OPTIONS.flatMap(g => g.options.map(o => o.value));
+
 const ContactFormInner = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [formData, setFormData] = useState({
@@ -74,27 +88,43 @@ const ContactFormInner = () => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Sync with Pricing plan clicks
+  // Sync with Pricing plan clicks & Services inquiries
   useEffect(() => {
     const handleSelectPlanEvent = (e: CustomEvent<string | SelectedPlanPayload>) => {
       const detail = e.detail;
       if (!detail) return;
 
       if (typeof detail === "string") {
+        // 1. Direct match with option values or labels
+        const allOptions = PLAN_OPTIONS.flatMap(g => g.options);
+        const exactMatch = allOptions.find(
+          o => o.value.toLowerCase() === detail.toLowerCase() || o.label.toLowerCase() === detail.toLowerCase()
+        );
+        if (exactMatch) {
+          setSelectedPlan(exactMatch.value);
+          return;
+        }
+
+        // 2. Specific pricing shorthand matching
         const lower = detail.toLowerCase();
-        if (lower.includes("mobile")) {
+        if (lower.includes("mobile") && (lower.includes("launch") || lower.includes("growth") || lower.includes("signature") || lower.includes("sprint") || lower.includes("powerhouse"))) {
           if (lower.includes("launch")) setSelectedPlan("Mobile · Launch Package");
           else if (lower.includes("signature")) setSelectedPlan("Mobile · Signature Package");
           else if (lower.includes("sprint")) setSelectedPlan("Mobile Subscription · App Sprint");
           else if (lower.includes("powerhouse")) setSelectedPlan("Mobile Subscription · Product Powerhouse");
           else setSelectedPlan("Mobile · Growth Package");
-        } else {
+          return;
+        } else if (lower.includes("web") && (lower.includes("launch") || lower.includes("growth") || lower.includes("signature") || lower.includes("sprint") || lower.includes("engine"))) {
           if (lower.includes("launch")) setSelectedPlan("Web · Launch Package");
           else if (lower.includes("signature")) setSelectedPlan("Web · Signature Package");
           else if (lower.includes("sprint")) setSelectedPlan("Web Subscription · Startup Sprint");
           else if (lower.includes("engine")) setSelectedPlan("Web Subscription · Growth Engine");
           else setSelectedPlan("Web · Growth Package");
+          return;
         }
+
+        // 3. Keep exact string
+        setSelectedPlan(detail);
       } else {
         const isMobile = detail.category === "mobile";
         if (detail.mode === "subscription") {
@@ -252,6 +282,11 @@ const ContactFormInner = () => {
               className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all appearance-none cursor-pointer"
             >
               <option value="" className="bg-background text-foreground">Select a plan or service...</option>
+              {selectedPlan && !ALL_PLAN_VALUES.includes(selectedPlan) && (
+                <option value={selectedPlan} className="bg-background text-foreground font-semibold">
+                  {selectedPlan}
+                </option>
+              )}
               {PLAN_OPTIONS.map((group, idx) => (
                 <optgroup key={idx} label={group.group} className="bg-background text-foreground font-semibold">
                   {group.options.map((opt) => (

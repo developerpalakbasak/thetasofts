@@ -9,7 +9,9 @@ import {
   Sparkles, 
   ShieldCheck, 
   Clock, 
-  ChevronDown
+  ChevronDown,
+  ShoppingCart,
+  ArrowUpRight
 } from "lucide-react";
 import {
   PricingMode,
@@ -50,12 +52,12 @@ const Pricing: React.FC = () => {
           name: "Launch Package",
           type: "Design Only",
           price: typeof p.launch === "number" ? `$${p.launch.toLocaleString()}` : p.launch,
-          tagline: "Clean, high-converting designs ready for your engineering team to build.",
+          tagline: "Clean, high-converting web & e-commerce designs ready for your engineering team to build.",
           features: [
             "Comprehensive UX & competitor research",
-            "Pixel-perfect high-fidelity UI designs",
+            "High-fidelity UI designs & e-commerce layouts",
             "Fully responsive for desktop, tablet & mobile",
-            "Clickable interactive Figma prototype",
+            "Clickable interactive Figma prototype & cart flows",
             "Foundational Design System (colors, fonts, tokens)",
             "Organized Developer Handoff & specs",
             "Unlimited design revisions until satisfaction"
@@ -68,14 +70,14 @@ const Pricing: React.FC = () => {
           badge: "Most Popular · End-to-End",
           isPopular: true,
           price: typeof p.growth === "number" ? `$${p.growth.toLocaleString()}` : p.growth,
-          tagline: "Complete turnkey solution: designed and fully coded on Framer, Webflow, or Next.js.",
+          tagline: "Complete turnkey solution: designed and fully coded on Next.js, Shopify, Webflow, or Framer.",
           features: [
             "Everything in Launch Package included",
-            "Framer / Webflow / Next.js production build",
-            "Full Design Documentation & component guides",
+            "Next.js / Shopify / Webflow production build",
+            "Full E-Commerce store setup & product catalog",
+            "Payment gateways (Stripe, PayPal, Apple Pay)",
             "Custom animations & micro-interactions",
             "Hosting, custom domain & SSL setup",
-            "Google Analytics 4 & tracking setup",
             "2 Months complimentary post-launch maintenance"
           ],
           ctaText: "Choose Growth"
@@ -84,14 +86,14 @@ const Pricing: React.FC = () => {
           name: "Signature Package",
           type: "Design + Dev + Brand Identity",
           price: typeof p.signature === "number" ? `$${p.signature.toLocaleString()}` : p.signature,
-          tagline: "The all-inclusive package: modern branding, custom 3D/AI visuals, code, and technical SEO.",
+          tagline: "The all-inclusive package: modern branding, custom 3D/AI visuals, headless e-commerce, code, and technical SEO.",
           features: [
             "Everything in Growth Package included",
-            "Full Brand Identity (Logo, guidelines, typography)",
+            "Full Brand Identity (Logo, guidelines, packaging/cards)",
+            "Headless E-Commerce & multi-currency architecture",
+            "Technical On-Page SEO & product schema markup",
             "AI & 3D custom brand photoshoot assets",
-            "Technical On-Page SEO & sitemap architecture",
             "Multilingual & internationalization support",
-            "Dark / Light mode color system support",
             "3 Months premium ongoing maintenance & support"
           ],
           ctaText: "Choose Signature"
@@ -104,11 +106,11 @@ const Pricing: React.FC = () => {
           name: "Launch Package",
           type: "App Design Only",
           price: typeof p.launch === "number" ? `$${p.launch.toLocaleString()}` : p.launch,
-          tagline: "Complete mobile UX/UI architecture ready for Swift/Kotlin or Flutter developers.",
+          tagline: "Complete mobile UX/UI & shopping app architecture ready for Swift/Kotlin or Flutter developers.",
           features: [
-            "In-depth user flow & wireframing analysis",
+            "In-depth user flow & mobile commerce wireframing",
             "Native iOS (HIG) & Android (Material 3) design",
-            "High-fidelity visual UI screens",
+            "High-fidelity visual UI screens & catalog flows",
             "Complete Design Style Guide & component library",
             "Vector graphic icons & custom illustrations",
             "Developer Handoff with spacing & typography tokens",
@@ -122,14 +124,14 @@ const Pricing: React.FC = () => {
           badge: "Most Popular · App Store Ready",
           isPopular: true,
           price: typeof p.growth === "number" ? `$${p.growth.toLocaleString()}` : p.growth,
-          tagline: "Polished design, interactive clickable prototype, App Icon, and Store graphic assets.",
+          tagline: "Polished design, interactive clickable prototype, in-app mobile checkout, App Icon, and Store graphic assets.",
           features: [
             "Everything in Launch Package included",
+            "In-app mobile checkout & digital wallet flows",
             "Clickable advanced Figma prototype with transitions",
             "App Store & Google Play marketing screenshots",
             "Custom App Icon design & splash screens",
             "Full brand palette & typography system",
-            "Design documentation for native engineering teams",
             "2 Months priority post-handoff design support"
           ],
           ctaText: "Choose Growth"
@@ -138,13 +140,13 @@ const Pricing: React.FC = () => {
           name: "Signature Package",
           type: "Design + App Store Launch + Dev Support",
           price: typeof p.signature === "number" ? `$${p.signature.toLocaleString()}` : p.signature,
-          tagline: "End-to-end mobile launch: design, token setup, store submission assistance, and analytics.",
+          tagline: "End-to-end mobile commerce launch: design, token setup, store submission, in-app purchases, and analytics.",
           features: [
             "Everything in Growth Package included",
+            "Mobile Commerce & In-App Purchase setup",
+            "Push notification triggers & cart reminder flows",
             "Design Token Support (JSON/Style Dictionary)",
             "Advanced mobile analytics & event tracking setup",
-            "Lottie animation assets for in-app micro-interactions",
-            "App Store & Google Play submission guidance",
             "Dark mode & Multilingual localization support",
             "3 Months comprehensive maintenance & iteration"
           ],
@@ -178,34 +180,36 @@ const Pricing: React.FC = () => {
           </h2>
 
           <p className="text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-space-grotesk leading-relaxed">
-            Choose between fixed-scope project packages or flexible monthly subscriptions. No hidden surprises—just world-class execution tailored to your roadmap.
+            Choose between fixed-scope project packages or flexible monthly subscriptions for SaaS platforms, mobile apps, and high-converting e-commerce stores. No hidden surprises—just world-class execution tailored to your roadmap.
           </p>
 
           {/* PART 1 & PART 2 SELECTOR: Web vs Mobile App */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
             <div className="inline-flex p-1.5 rounded-2xl bg-foreground/5 border border-foreground/10 shadow-lg backdrop-blur-md">
               <button
+                type="button"
                 onClick={() => setActiveCategory("web")}
-                className={`flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                className={`flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
                   activeCategory === "web"
                     ? "btn-primary shadow-none hover:shadow-[0_0_10px_#9cfeca] text-white font-bold scale-[1.02]"
                     : "text-black dark:text-gray-300 hover:text-secondary"
                 }`}
               >
                 <Globe className="w-4 h-4" />
-                <span>1. Web & Platforms</span>
+                <span>1. Web, Platforms & E-Commerce</span>
               </button>
 
               <button
+                type="button"
                 onClick={() => setActiveCategory("mobile")}
-                className={`flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                className={`flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
                   activeCategory === "mobile"
                     ? "btn-primary shadow-none hover:shadow-[0_0_10px_#9cfeca] text-white font-bold scale-[1.02]"
                     : "text-black dark:text-gray-300 hover:text-secondary"
                 }`}
               >
                 <Smartphone className="w-4 h-4" />
-                <span>2. Mobile App (iOS / Android)</span>
+                <span>2. Mobile Apps & mCommerce</span>
               </button>
             </div>
           </div>
@@ -214,8 +218,9 @@ const Pricing: React.FC = () => {
           <div className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-black dark:text-gray-400 font-space-grotesk">
             <span>Model:</span>
             <button
+              type="button"
               onClick={() => setPricingMode("fixed")}
-              className={`px-3.5 py-1.5 rounded-lg border transition ${
+              className={`px-3.5 py-1.5 rounded-lg border transition cursor-pointer ${
                 pricingMode === "fixed"
                   ? "btn-primary text-xs !py-1.5 !px-3.5 font-bold rounded-lg text-center shadow-none hover:shadow-[0_0_10px_#9cfeca] border-none"
                   : "border-foreground/10 hover:border-foreground/30 text-gray-500"
@@ -224,8 +229,9 @@ const Pricing: React.FC = () => {
               Fixed Scope Package
             </button>
             <button
+              type="button"
               onClick={() => setPricingMode("subscription")}
-              className={`px-3.5 py-1.5 rounded-lg border transition flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-lg border transition flex items-center gap-1.5 cursor-pointer ${
                 pricingMode === "subscription"
                   ? "btn-primary text-xs !py-1.5 !px-3.5 font-bold rounded-lg text-center shadow-none hover:shadow-[0_0_10px_#9cfeca] border-none"
                   : "border-foreground/10 hover:border-foreground/30 text-gray-500"
@@ -242,7 +248,7 @@ const Pricing: React.FC = () => {
           <div className="max-w-4xl mx-auto mb-12">
             <div className="text-center mb-3">
               <span className="text-xs font-semibold text-secondary uppercase tracking-widest font-mono">
-                {activeCategory === "web" ? "Select Number of Website Pages:" : "Select Number of App Screens:"}
+                {activeCategory === "web" ? "Select Number of Website & Store Pages:" : "Select Number of App Screens:"}
               </span>
             </div>
 
@@ -251,12 +257,13 @@ const Pricing: React.FC = () => {
                 const isSelected = activeCategory === "web" ? selectedWebScope === scope.id : selectedMobileScope === scope.id;
                 return (
                   <button
+                    type="button"
                     key={scope.id}
                     onClick={() => {
                       if (activeCategory === "web") setSelectedWebScope(scope.id);
                       else setSelectedMobileScope(scope.id);
                     }}
-                    className={`py-3 px-2 rounded-xl text-center transition-all duration-200 border ${
+                    className={`py-3 px-2 rounded-xl text-center transition-all duration-200 border cursor-pointer ${
                       isSelected
                         ? "btn-primary !py-3 !px-2 font-bold text-white rounded-xl text-center shadow-none hover:shadow-[0_0_10px_#9cfeca] border-none scale-[1.02]"
                         : "bg-transparent border-transparent hover:bg-foreground/5 text-black dark:text-gray-300"
@@ -329,6 +336,7 @@ const Pricing: React.FC = () => {
                 <div className="w-full [&>div]:w-full">
                   <Magnetic>
                     <button
+                      type="button"
                       onClick={() =>
                         handleSelectPlan({
                           category: activeCategory,
@@ -336,7 +344,7 @@ const Pricing: React.FC = () => {
                           tierName: tier.name,
                           scope: activeCategory === "web" ? selectedWebScope : selectedMobileScope,
                           price: tier.price,
-                          summary: `${activeCategory === "web" ? "Web" : "Mobile App"} · ${tier.name} (${tier.price})`
+                          summary: `${activeCategory === "web" ? "Web & E-Commerce" : "Mobile App"} · ${tier.name} (${tier.price})`
                         })
                       }
                       className={
@@ -403,6 +411,7 @@ const Pricing: React.FC = () => {
                 <div className="w-full [&>div]:w-full">
                   <Magnetic>
                     <button
+                      type="button"
                       onClick={() =>
                         handleSelectPlan({
                           category: activeCategory,
@@ -410,7 +419,7 @@ const Pricing: React.FC = () => {
                           tierName: sub.name,
                           scope: sub.hours,
                           price: `$${sub.rate}/mo`,
-                          summary: `${activeCategory === "web" ? "Web" : "Mobile App"} Subscription · ${sub.name} ($${sub.rate}/mo)`
+                          summary: `${activeCategory === "web" ? "Web & E-Commerce" : "Mobile App"} Subscription · ${sub.name} ($${sub.rate}/mo)`
                         })
                       }
                       className={
@@ -428,9 +437,56 @@ const Pricing: React.FC = () => {
           </div>
         )}
 
+        {/* Glorifying E-Commerce Banner */}
+        <div className="max-w-5xl mx-auto mb-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-secondary/15 via-foreground/5 to-secondary/10 border border-secondary/30 relative overflow-hidden shadow-[0_0_50px_rgba(156,254,202,0.08)]">
+          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-secondary/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+            <div className="space-y-3 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/20 border border-secondary/40 text-secondary text-xs font-bold uppercase tracking-wider">
+                <ShoppingCart className="w-4 h-4" />
+                <span>Full-Scale E-Commerce & Retail Solutions</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-bold font-syne text-foreground tracking-tight">
+                Selling Online? We Build High-Converting Stores & Mobile Shopping Apps.
+              </h3>
+              <p className="text-sm sm:text-base text-black dark:text-gray-300 font-space-grotesk max-w-2xl leading-relaxed">
+                Whether you need a high-converting Shopify store, a custom headless Next.js Commerce engine, or native iOS & Android shopping apps with 1-click Apple Pay, we craft digital storefronts engineered for maximum average order value and frictionless repeat sales.
+              </p>
+              
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-2">
+                <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10 text-foreground flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-secondary" /> Shopify & Headless Stores
+                </span>
+                <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10 text-foreground flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-secondary" /> iOS & Android Shopping Apps
+                </span>
+                <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10 text-foreground flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-secondary" /> Stripe, Apple Pay & Klarna
+                </span>
+                <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10 text-foreground flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-secondary" /> Real-time Inventory Sync
+                </span>
+              </div>
+            </div>
+
+            <div className="shrink-0 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => handleSelectPlan("E-Commerce & Mobile Shopping Apps")}
+                className="btn-primary w-full sm:w-auto py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(156,254,202,0.3)] hover:scale-[1.02] cursor-pointer"
+              >
+                <span>Inquire E-Commerce Store</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Interactive Feature Comparison Table Toggle */}
         <div className="text-center mb-16">
           <button
+            type="button"
             onClick={() => setShowMatrix(!showMatrix)}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-foreground/5 hover:bg-foreground/10 border border-foreground/10 text-xs font-semibold text-secondary transition-all cursor-pointer"
           >
@@ -464,6 +520,12 @@ const Pricing: React.FC = () => {
                       <td className="py-3.5 px-4 text-center text-secondary font-bold">Included</td>
                     </tr>
                     <tr>
+                      <td className="py-3.5 px-6 font-medium text-foreground">E-Commerce & Store Architecture</td>
+                      <td className="py-3.5 px-4 text-center">Cart & Checkout UX</td>
+                      <td className="py-3.5 px-4 text-center text-secondary font-bold bg-secondary/10">Shopify / Next.js / Stripe</td>
+                      <td className="py-3.5 px-4 text-center text-secondary font-bold">Headless + Multi-Currency + ERP</td>
+                    </tr>
+                    <tr>
                       <td className="py-3.5 px-6 font-medium text-foreground">Full Design System / Style Guide</td>
                       <td className="py-3.5 px-4 text-center text-secondary font-bold">Included</td>
                       <td className="py-3.5 px-4 text-center text-secondary font-bold bg-secondary/10">Included</td>
@@ -478,7 +540,7 @@ const Pricing: React.FC = () => {
                     <tr>
                       <td className="py-3.5 px-6 font-medium text-foreground">Code Development</td>
                       <td className="py-3.5 px-4 text-center text-gray-400">— (Handoff Only)</td>
-                      <td className="py-3.5 px-4 text-center text-secondary font-bold bg-secondary/10">Framer / Webflow / App</td>
+                      <td className="py-3.5 px-4 text-center text-secondary font-bold bg-secondary/10">Framer / Webflow / App / Store</td>
                       <td className="py-3.5 px-4 text-center text-secondary font-bold">Full Stack + SEO + Tokens</td>
                     </tr>
                     <tr>
@@ -513,7 +575,7 @@ const Pricing: React.FC = () => {
           <div className="flex-1 text-center md:text-left relative z-10">
             <h4 className="text-xl sm:text-2xl font-syne font-bold text-foreground mb-2">Our Standard Assurance</h4>
             <p className="text-black dark:text-gray-400 font-space-grotesk text-sm sm:text-base max-w-md mx-auto md:mx-0">
-              Every Web & Mobile project includes unlimited design iterations and dedicated handoff support so your launch is smooth and risk-free.
+              Every Web, Mobile & E-Commerce project includes unlimited design iterations and dedicated handoff support so your launch is smooth and risk-free.
             </p>
           </div>
           
@@ -535,6 +597,16 @@ const Pricing: React.FC = () => {
               <div className="text-left">
                 <span className="block text-sm font-bold text-foreground">Unlimited</span>
                 <span className="block text-xs text-black dark:text-gray-400 font-space-grotesk">Iterative Revisions</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 bg-foreground/5 rounded-2xl px-5 py-4 border border-foreground/5 w-full sm:w-auto">
+              <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold border border-secondary/30">
+                <ShoppingCart className="w-6 h-6 text-secondary" />
+              </div>
+              <div className="text-left">
+                <span className="block text-sm font-bold text-foreground">E-Commerce</span>
+                <span className="block text-xs text-black dark:text-gray-400 font-space-grotesk">Storefront & Checkout Ready</span>
               </div>
             </div>
           </div>

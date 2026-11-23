@@ -30,10 +30,10 @@ export interface SelectedPlanPayload {
 // Web Scopes & Prices
 export const WEB_SCOPES: ScopeOption[] = [
   { id: "1-4", label: "1–4 Pages", subtitle: "Landing page & microsites" },
-  { id: "5-9", label: "5–9 Pages", subtitle: "Standard business / SaaS sites" },
-  { id: "10-15", label: "10–15 Pages", subtitle: "High-growth product platforms" },
-  { id: "16-25", label: "16–25 Pages", subtitle: "Complex multi-page portals" },
-  { id: "enterprise", label: "Enterprise", subtitle: "Custom scalable architecture" }
+  { id: "5-9", label: "5–9 Pages", subtitle: "Business, SaaS & E-Commerce Stores" },
+  { id: "10-15", label: "10–15 Pages", subtitle: "High-growth platforms & online shops" },
+  { id: "16-25", label: "16–25 Pages", subtitle: "Complex multi-page portals & retail" },
+  { id: "enterprise", label: "Enterprise", subtitle: "Global headless commerce & custom architecture" }
 ];
 
 export const WEB_PRICING_TABLE: Record<string, { launch: number | string; growth: number | string; signature: number | string }> = {
@@ -47,10 +47,10 @@ export const WEB_PRICING_TABLE: Record<string, { launch: number | string; growth
 // Mobile Scopes & Prices
 export const MOBILE_SCOPES: ScopeOption[] = [
   { id: "1-10", label: "1–10 Screens", subtitle: "MVP & core user journey" },
-  { id: "11-25", label: "11–25 Screens", subtitle: "Standard feature-rich app" },
-  { id: "26-40", label: "26–40 Screens", subtitle: "Multi-role / SaaS mobile app" },
-  { id: "41-60", label: "41–60 Screens", subtitle: "Full-scale enterprise app" },
-  { id: "enterprise", label: "Enterprise", subtitle: "Multi-platform ecosystem" }
+  { id: "11-25", label: "11–25 Screens", subtitle: "Standard & mobile shopping app" },
+  { id: "26-40", label: "26–40 Screens", subtitle: "Multi-role / SaaS & mCommerce app" },
+  { id: "41-60", label: "41–60 Screens", subtitle: "Full-scale enterprise & marketplace app" },
+  { id: "enterprise", label: "Enterprise", subtitle: "Multi-platform commerce ecosystem" }
 ];
 
 export const MOBILE_PRICING_TABLE: Record<string, { launch: number | string; growth: number | string; signature: number | string }> = {
