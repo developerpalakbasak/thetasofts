@@ -34,10 +34,10 @@ const Hero: React.FC = () => {
   };
 
   const floatingTags = [
-    { text: "🤝 Honest & Transparent", top: "18%", left: "8%", rotate: -8, delay: 0 },
-    { text: "🚀 Fast Delivery, Zero Stress", top: "42%", left: "4%", rotate: 12, delay: 1 },
-    { text: "💰 More Customers, More Revenue", top: "14%", right: "8%", rotate: 6, delay: 2 },
-    { text: "🛡️ We Handle Everything For You", top: "48%", right: "5%", rotate: -10, delay: 3 },
+    { text: "🤝 Honest & Transparent", top: "18%", left: "3%", rotate: -8, delay: 0 },
+    { text: "🚀 Fast Delivery, Zero Stress", top: "44%", left: "2%", rotate: 12, delay: 1 },
+    { text: "💰 More Customers, More Revenue", top: "14%", right: "3%", rotate: 6, delay: 2 },
+    { text: "🛡️ We Handle Everything For You", top: "50%", right: "2%", rotate: -10, delay: 3 },
   ];
 
   return (
@@ -59,7 +59,7 @@ const Hero: React.FC = () => {
       {floatingTags.map((tag, idx) => (
         <motion.div
           key={idx}
-          className="absolute hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-xl border border-foreground/5 bg-foreground/5 backdrop-blur-md text-xs font-semibold text-black dark:text-gray-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] z-20"
+          className="absolute hidden xl:flex items-center gap-2 px-4 py-2.5 rounded-xl border border-foreground/5 bg-foreground/5 backdrop-blur-md text-xs font-semibold text-black dark:text-gray-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] z-20"
           style={{
             top: tag.top,
             left: tag.left,
@@ -101,20 +101,20 @@ const Hero: React.FC = () => {
       <div className="hidden md:block h-6" />
 
       {/* Main Content Group */}
-      <div className="z-10 flex-1 flex flex-col justify-center items-center text-center px-4 max-w-5xl gap-8 md:gap-10 w-full">
+      <div className="z-10 flex-1 flex flex-col justify-center items-center text-center px-4 max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl gap-6 sm:gap-8 md:gap-10 w-full">
         {/* Strategic Badge */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="px-3 sm:px-6 mx-3 py-2 rounded-full border border-secondary/30 bg-secondary/5 text-xs md:text-sm font-semibold tracking-wider text-secondary shadow-[0_0_15px_rgba(156,254,202,0.08)] backdrop-blur-sm"
+          className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full border border-secondary/30 bg-secondary/5 text-xs sm:text-sm md:text-base font-semibold tracking-wider text-secondary shadow-[0_0_15px_rgba(156,254,202,0.08)] backdrop-blur-sm"
         >
           ✨ We Turn Your Business Ideas Into Digital Reality
         </motion.div>
 
         {/* Content Container */}
         <div className="flex flex-col justify-center items-center text-center w-full">
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.1] font-syne">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] 2xl:text-[88px] font-bold tracking-tight leading-[1.12] sm:leading-[1.08] lg:leading-[1.03] font-syne">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="block min-h-[75px] md:min-h-[90px] mt-2 bg-gradient-to-r from-secondary via-btn to-white bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(156,254,202,0.15)]"
+              className="block min-h-[90px] sm:min-h-[110px] md:min-h-[135px] lg:min-h-[160px] xl:min-h-[185px] mt-2 sm:mt-3 bg-gradient-to-r from-secondary via-btn to-white bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(156,254,202,0.15)]"
             >
               <Typewriter quotes={quotes} className="text-secondary" />
             </motion.span>
@@ -137,7 +137,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="mt-6 text-base md:text-xl text-black dark:text-gray-400 max-w-2xl font-space-grotesk leading-relaxed"
+            className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-2xl text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl font-space-grotesk leading-relaxed"
           >
             Whether you need a stunning website, a mobile app, or a complete online store — we build it for you, keep it running smoothly, and help more people discover your business online.
           </motion.p>

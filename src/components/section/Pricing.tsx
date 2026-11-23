@@ -166,18 +166,18 @@ const Pricing: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-10 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-xs font-semibold uppercase tracking-wider mb-4">
+        <div className="text-center max-w-3xl lg:max-w-4xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Clear, Honest Pricing Packages</span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold font-syne mb-6 tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-bold font-syne mb-6 tracking-tight leading-[1.12]">
             Premium Quality With <br />
             <span className="text-secondary">Affordability & Total Flexibility</span>
           </h2>
 
-          <p className="text-black dark:text-gray-400 max-w-2xl mx-auto text-base md:text-lg font-space-grotesk">
+          <p className="text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-space-grotesk leading-relaxed">
             Choose between fixed-scope project packages or flexible monthly subscriptions. No hidden surprises—just world-class execution tailored to your roadmap.
           </p>
 
@@ -292,18 +292,18 @@ const Pricing: React.FC = () => {
 
                 <div className="mb-6">
                   <div className="flex items-center justify-between gap-3 mb-2 pt-1">
-                    <h3 className="text-xl font-bold font-syne text-foreground">{tier.name}</h3>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-syne text-foreground">{tier.name}</h3>
                     <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border border-secondary/30 bg-secondary/10 text-secondary">
                       {tier.type}
                     </span>
                   </div>
 
-                  <p className="text-xs text-black dark:text-gray-400 font-space-grotesk min-h-[34px] mb-5 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-black dark:text-gray-400 font-space-grotesk min-h-[34px] mb-5 leading-relaxed">
                     {tier.tagline}
                   </p>
 
                   <div className="flex items-baseline gap-1.5 pb-6 border-b border-foreground/10">
-                    <span className="text-4xl sm:text-5xl font-bold font-syne text-foreground tracking-tight">
+                    <span className="text-4xl sm:text-5xl lg:text-6xl font-bold font-syne text-foreground tracking-tight">
                       {tier.price}
                     </span>
                     {tier.price !== "Custom" && (
@@ -371,17 +371,17 @@ const Pricing: React.FC = () => {
                 )}
 
                 <div className="mb-6 pt-1">
-                  <h3 className="text-2xl font-bold font-syne text-foreground mb-1">{sub.name}</h3>
-                  <p className="text-xs text-secondary font-mono font-semibold mb-4">{sub.hours}</p>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-syne text-foreground mb-1">{sub.name}</h3>
+                  <p className="text-xs sm:text-sm text-secondary font-mono font-semibold mb-4">{sub.hours}</p>
                   
                   <div className="flex items-baseline gap-1.5 pb-6 border-b border-foreground/10">
-                    <span className="text-4xl sm:text-5xl font-bold font-syne text-foreground tracking-tight">
+                    <span className="text-4xl sm:text-5xl lg:text-6xl font-bold font-syne text-foreground tracking-tight">
                       ${sub.rate}
                     </span>
-                    <span className="text-xs text-black dark:text-gray-400 font-space-grotesk">/ month</span>
+                    <span className="text-xs sm:text-sm text-black dark:text-gray-400 font-space-grotesk">/ month</span>
                   </div>
 
-                  <p className="text-xs text-black dark:text-gray-400 font-space-grotesk mt-4 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-black dark:text-gray-400 font-space-grotesk mt-4 leading-relaxed">
                     {sub.tagline}
                   </p>
                 </div>
@@ -511,8 +511,8 @@ const Pricing: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           
           <div className="flex-1 text-center md:text-left relative z-10">
-            <h4 className="text-lg md:text-xl font-syne font-bold text-foreground mb-2">Our Standard Assurance</h4>
-            <p className="text-black dark:text-gray-400 font-space-grotesk text-sm max-w-md mx-auto md:mx-0">
+            <h4 className="text-xl sm:text-2xl font-syne font-bold text-foreground mb-2">Our Standard Assurance</h4>
+            <p className="text-black dark:text-gray-400 font-space-grotesk text-sm sm:text-base max-w-md mx-auto md:mx-0">
               Every Web & Mobile project includes unlimited design iterations and dedicated handoff support so your launch is smooth and risk-free.
             </p>
           </div>

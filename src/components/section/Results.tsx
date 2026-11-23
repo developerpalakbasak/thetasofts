@@ -73,12 +73,12 @@ const Results: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 md:px-10 relative z-10">
 
                 {/* Section Heading */}
-                <div className="text-center mb-16">
-                    <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">Real Results, Real Businesses</h2>
-                    <h3 className="text-2xl md:text-3xl font-medium font-syne mb-6">
+                <div className="text-center mb-16 sm:mb-20">
+                    <p className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-secondary font-semibold mb-3 sm:mb-4">Real Results, Real Businesses</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-bold font-syne mb-6 tracking-tight leading-[1.12]">
                         Numbers That <span className="text-secondary">Speak for Themselves</span>
-                    </h3>
-                    <p className="text-black dark:text-gray-400 max-w-2xl mx-auto text-lg font-space-grotesk">
+                    </h2>
+                    <p className="text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-space-grotesk leading-relaxed">
                         Every project we deliver is measured by one thing — how much it moves the needle for your business.
                     </p>
                 </div>
@@ -94,27 +94,27 @@ const Results: React.FC = () => {
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                             className=" p-2 md:p-8 rounded-2xl border border-foreground/5 bg-foreground/5 backdrop-blur-sm hover:border-secondary/30 transition-colors shadow-lg"
                         >
-                            <h4 className="text-2xl md:text-3xl font-semibold font-syne text-secondary mb-2 drop-shadow-[0_0_15px_rgba(156,254,202,0.15)] flex justify-center">
+                            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-syne text-secondary mb-2 drop-shadow-[0_0_15px_rgba(156,254,202,0.15)] flex justify-center">
                                 <AnimatedCounter value={metric.value} delay={index * 0.15 + 0.3} />
-                            </h4>
-                            <p className="text-foreground font-bold mb-2 uppercase tracking-widest text-xs">{metric.label}</p>
-                            <p className="text-black dark:text-gray-400 text-sm font-space-grotesk ">{metric.description}</p>
+                            </h3>
+                            <p className="text-foreground font-bold mb-2 uppercase tracking-widest text-xs sm:text-sm">{metric.label}</p>
+                            <p className="text-black dark:text-gray-400 text-xs sm:text-sm font-space-grotesk ">{metric.description}</p>
                         </motion.div>
                     ))}
                 </div>
 
-                <div className="text-center mb-16">
+                <div className="text-center mb-16 sm:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">Real Success Stories</h2>
-                        <h3 className="text-2xl md:text-3xl font-medium font-syne mb-6 leading-tight">
+                        <p className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-secondary font-semibold mb-3 sm:mb-4">Real Success Stories</p>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-bold font-syne mb-6 tracking-tight leading-tight">
                             Businesses Like Yours <br />
                             <span className="text-secondary">That Grew With Us.</span>
-                        </h3>
+                        </h2>
                     </motion.div>
                 </div>
 
@@ -137,13 +137,13 @@ const Results: React.FC = () => {
                                     {study.category}
                                 </span>
                             </div>
-                            <h4 className="text-lg font-semibold font-syne text-foreground mb-3 group-hover:text-secondary transition-colors">
+                            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-syne text-foreground mb-3 group-hover:text-secondary transition-colors">
                                 {study.title}
-                            </h4>
+                            </h3>
                             <p className="text-base md:text-lg font-medium text-black dark:text-gray-200 mb-4 font-space-grotesk italic">
                                 &quot;{study.outcome}&quot;
                             </p>
-                            <p className="text-black dark:text-gray-400 font-space-grotesk mb-8 flex-1 leading-relaxed">
+                            <p className="text-sm sm:text-base text-black dark:text-gray-400 font-space-grotesk mb-8 flex-1 leading-relaxed">
                                 {study.description}
                             </p>
 

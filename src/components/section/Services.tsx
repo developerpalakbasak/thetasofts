@@ -73,12 +73,12 @@ const Services: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-10 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">What We Do For You</h2>
-          <h3 className="text-2xl md:text-3xl font-medium font-syne mb-6">
+        <div className="text-center mb-16 sm:mb-20">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-secondary font-semibold mb-3 sm:mb-4">What We Do For You</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-bold font-syne mb-6 tracking-tight leading-[1.12]">
             Everything Your Business Needs <span className="text-secondary">Online</span>
-          </h3>
-          <p className="text-black dark:text-gray-400 max-w-2xl mx-auto text-lg font-space-grotesk">
+          </h2>
+          <p className="text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-space-grotesk leading-relaxed">
             From getting your first website live to growing a full digital business — we are the only team you will ever need.
           </p>
         </div>
@@ -96,10 +96,10 @@ const Services: React.FC = () => {
                 <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 border border-secondary/20 shadow-[0_0_10px_rgba(156,254,202,0.1)] group-hover:shadow-[0_0_15px_rgba(156,254,202,0.3)] transition-all duration-300">
                   {service.icon}
                 </div>
-                <h4 className="text-base font-semibold font-syne mb-3 group-hover:text-secondary transition-colors">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold font-syne mb-3 group-hover:text-secondary transition-colors">
                   {service.title}
-                </h4>
-                <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed">
+                </h3>
+                <p className="text-sm sm:text-base text-black dark:text-gray-400 font-space-grotesk leading-relaxed">
                   {service.description}
                 </p>
               </div>

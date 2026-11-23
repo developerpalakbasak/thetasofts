@@ -528,20 +528,20 @@ const WorkFlows: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="text-center mb-16 sm:mb-24"
         >
-          <p className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-secondary font-semibold mb-3 sm:mb-4">
             How We Help Your Business
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-medium font-syne mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-bold font-syne mb-6 tracking-tight leading-[1.12]">
             Five Ways We{" "}
             <span className="text-secondary">
               Grow Your Business Online
             </span>
           </h2>
 
-          <p className="text-black dark:text-gray-400 max-w-2xl mx-auto font-space-grotesk text-lg">
+          <p className="text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl mx-auto font-space-grotesk text-base sm:text-lg md:text-xl leading-relaxed">
             From your first website to a full digital business — we handle the
             hard stuff so you can focus on what you do best.
           </p>
@@ -606,11 +606,11 @@ const WorkFlows: React.FC = () => {
                             {service.icon}
                           </div>
 
-                          <h3 className="text-xl font-semibold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
+                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
                             {service.title}
                           </h3>
 
-                          <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm">
+                          <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm sm:text-base">
                             {service.description}
                           </p>
 
@@ -670,11 +670,11 @@ const WorkFlows: React.FC = () => {
                             {service.icon}
                           </div>
 
-                          <h3 className="text-xl font-semibold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
+                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-syne mb-3 group-hover:text-[var(--accent)] transition-colors duration-200">
                             {service.title}
                           </h3>
 
-                          <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm">
+                          <p className="text-black dark:text-gray-400 font-space-grotesk leading-relaxed text-sm sm:text-base">
                             {service.description}
                           </p>
 

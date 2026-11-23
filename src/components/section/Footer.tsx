@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
         setStatus({ type: 'success', message: data.message || 'Subscribed successfully!' });
         setEmail('');
       }
-    } catch (error) {
+    } catch {
       setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
     } finally {
       setLoading(false);
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
 
             {/* Capabilities Col */}
             <div className="flex-1">
-              <h4 className="text-sm font-semibold font-syne uppercase tracking-wider text-foreground mb-6">
+              <h4 className="text-sm sm:text-base font-bold font-syne uppercase tracking-wider text-foreground mb-6">
                 Our Services
               </h4>
               <ul className="space-y-4 text-sm font-space-grotesk text-black dark:text-gray-400">
@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
 
             {/* Explore Col */}
             <div className="flex-1">
-              <h4 className="text-sm font-semibold font-syne uppercase tracking-wider text-foreground mb-6">
+              <h4 className="text-sm sm:text-base font-bold font-syne uppercase tracking-wider text-foreground mb-6">
                 Explore
               </h4>
               <ul className="space-y-4 text-sm font-space-grotesk text-black dark:text-gray-400">
@@ -201,7 +201,7 @@ const Footer: React.FC = () => {
 
           {/* Stay Connected Col */}
           <div>
-            <h4 className="text-sm font-semibold font-syne uppercase tracking-wider text-foreground mb-6">
+            <h4 className="text-sm sm:text-base font-bold font-syne uppercase tracking-wider text-foreground mb-6">
               Stay Connected
             </h4>
             <p className="text-black dark:text-gray-400 text-xs font-space-grotesk leading-relaxed mb-4">

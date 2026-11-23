@@ -40,17 +40,17 @@ const Reviews: React.FC = () => {
             className="pt-12 sm:pt-16 relative overflow-hidden"
         >
             <div className="max-w-7xl mx-auto px-4 md:px-10 relative z-10">
-                <div className="text-center mb-16">
-                    <h2 className="text-xs uppercase tracking-[0.3em] text-secondary font-semibold mb-4">
+                <div className="text-center mb-16 sm:mb-20">
+                    <p className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-secondary font-semibold mb-3 sm:mb-4">
                         Client Stories
-                    </h2>
+                    </p>
 
-                    <h3 className="text-2xl md:text-3xl font-medium font-syne mb-6">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-bold font-syne mb-6 tracking-tight leading-[1.12]">
                         Real People.{" "}
                         <span className="text-secondary">Real Results.</span>
-                    </h3>
+                    </h2>
 
-                    <p className="text-black dark:text-gray-400 max-w-2xl mx-auto text-lg font-space-grotesk">
+                    <p className="text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-space-grotesk leading-relaxed">
                         Don&apos;t just take our word for it. Here&apos;s what
                         business owners across different industries say about
                         working with us.
@@ -70,11 +70,11 @@ const Reviews: React.FC = () => {
                                 </div>
 
                                 <div>
-                                    <h4 className="font-semibold font-syne text-foreground">
+                                    <h4 className="font-bold font-syne text-foreground text-base sm:text-lg">
                                         {review.name}
                                     </h4>
 
-                                    <p className="text-sm text-black dark:text-gray-500">
+                                    <p className="text-xs sm:text-sm text-black dark:text-gray-500">
                                         {review.role}
                                     </p>
 
