@@ -4,18 +4,18 @@ import Link from 'next/link';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import Typewriter from '../utils/Typewriter';
+import Typewriter, { ResponsiveQuote } from '../utils/Typewriter';
 import Stars from '../utils/Stars';
 import Magnetic from '../utils/Magnetic';
 
-const quotes = [
-  "Websites That Win Clients",
-  "Mobile Apps Your Customers Love",
-  "Online Stores That Actually Sell",
-  "Brands That Get Found on Google",
-  "Digital Tools That Save You Time",
-  "Software Built Around Your Business",
-  "Results You Can See & Measure"
+const quotes: ResponsiveQuote[] = [
+  { desktop: "Websites That Win Clients", mobile: ["Websites", "That Win Clients"] },
+  { desktop: "Mobile Apps Your Customers Love", mobile: ["Mobile Apps", "Your Customers Love"] },
+  { desktop: "Online Stores That Actually Sell", mobile: ["Online Stores", "That Actually Sell"] },
+  { desktop: "Brands That Get Found on Google", mobile: ["Brands That", "Get Found on Google"] },
+  { desktop: "Digital Tools That Save You Time", mobile: ["Digital Tools", "That Save You Time"] },
+  { desktop: "Software Built Around Your Business", mobile: ["Software Built", "Around Your Business"] },
+  { desktop: "Results You Can See & Measure", mobile: ["Results You Can", "See & Measure"] }
 ];
 
 const Hero: React.FC = () => {
@@ -41,17 +41,17 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <div 
-      id='hero' 
+    <div
+      id='hero'
       className="relative flex flex-col justify-between items-center pt-28 pb-8 min-h-screen bg-background overflow-hidden"
     >
       {/* Background Cyber Grid lines */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000018_1px,transparent_1px),linear-gradient(to_bottom,#00000018_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-      
+
       {/* Subtle tech ambient gradients */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[140px] pointer-events-none" />
-      
+
       {/* Moving background stars */}
       <Stars />
 
@@ -86,9 +86,9 @@ const Hero: React.FC = () => {
             opacity: { duration: 0.6 },
             scale: { duration: 0.6 }
           }}
-          whileHover={{ 
-            scale: 1.1, 
-            opacity: 1, 
+          whileHover={{
+            scale: 1.1,
+            opacity: 1,
             borderColor: 'rgba(156,254,202,0.4)',
             boxShadow: '0 0 15px rgba(156,254,202,0.15)'
           }}
@@ -103,7 +103,7 @@ const Hero: React.FC = () => {
       {/* Main Content Group */}
       <div className="z-10 flex-1 flex flex-col justify-center items-center text-center px-4 max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl gap-6 sm:gap-8 md:gap-10 w-full">
         {/* Strategic Badge */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
 
         {/* Content Container */}
         <div className="flex flex-col justify-center items-center text-center w-full">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] 2xl:text-[88px] font-bold tracking-tight leading-[1.12] sm:leading-[1.08] lg:leading-[1.03] font-syne">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] 2xl:text-[88px] font-bold tracking-tight leading-[1.15] sm:leading-[1.08] lg:leading-[1.03] font-syne">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="block min-h-[90px] sm:min-h-[110px] md:min-h-[135px] lg:min-h-[160px] xl:min-h-[185px] mt-2 sm:mt-3 bg-gradient-to-r from-secondary via-btn to-white bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(156,254,202,0.15)]"
+              className="block min-h-[75px] sm:min-h-[110px] md:min-h-[135px] lg:min-h-[160px] xl:min-h-[185px] mt-2 sm:mt-3 bg-gradient-to-r from-secondary via-btn to-white bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(156,254,202,0.15)]"
             >
               <Typewriter quotes={quotes} className="text-secondary" />
             </motion.span>
@@ -137,14 +137,14 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-2xl text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl font-space-grotesk leading-relaxed"
+            className="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-2xl text-black dark:text-gray-400 max-w-2xl lg:max-w-3xl font-space-grotesk leading-relaxed"
           >
             Whether you need a stunning website, a mobile app, or a complete online store — we build it for you, keep it running smoothly, and help more people discover your business online.
           </motion.p>
         </div>
 
         {/* Actions */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
@@ -157,10 +157,10 @@ const Hero: React.FC = () => {
               className="btn-primary flex items-center gap-3 px-10 py-5 rounded-2xl text-base font-bold shadow-[0_0_20px_rgba(58,231,181,0.2)] hover:shadow-[0_0_40px_rgba(58,231,181,0.45)] hover:scale-[1.03] transition-all"
             >
               <span>Get a Free Consultation</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" x2="19" y1="12" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </Link>
           </Magnetic>
-          
+
           <p className="text-xs md:text-sm text-black dark:text-gray-500 font-space-grotesk tracking-wide mt-2">
             ✅ Free Consultation • No Commitment • Results Guaranteed
           </p>
@@ -168,7 +168,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* bottom indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
         transition={{ delay: 1, duration: 1 }}
@@ -176,12 +176,12 @@ const Hero: React.FC = () => {
         onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
       >
         <span className="text-[10px] uppercase tracking-[0.25em] text-black dark:text-gray-500 font-semibold">Scroll to explore</span>
-        <motion.div 
+        <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
           className="text-secondary"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
         </motion.div>
       </motion.div>
     </div>

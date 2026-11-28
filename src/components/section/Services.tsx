@@ -184,7 +184,7 @@ const Services: React.FC = () => {
     <section 
       id="services" 
       style={{ overflowAnchor: "none" }}
-      className="pt-12 sm:pt-16 pb-16 sm:pb-24 relative overflow-hidden bg-background"
+      className="pt-10 sm:pt-16 pb-16 sm:pb-24 relative overflow-hidden bg-background"
     >
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[140px] pointer-events-none -z-10" />
